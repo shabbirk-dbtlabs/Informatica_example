@@ -1,0 +1,3 @@
+pp_end_year,pp_num,dfas_pseudo_ssn,line_type,fir_name_1,surname_3,soc_sec_no,pyf_pay_det_cd,occup_cde,job_loc_cde,org_cde,ehrp_emp_id,pay_basis
+2024,7,P000000007,D,Jamie,Kim,333445555,BASIC,0602,MD10,ORG4001,E1007,PA
+2024,7,P000000008,D,Drew,Lopez,666778888,NDIFF,0610,MD11,ORG4002,E1008,PB

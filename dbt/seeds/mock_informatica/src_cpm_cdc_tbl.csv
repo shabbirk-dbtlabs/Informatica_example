@@ -1,0 +1,3 @@
+pp_end_year,pp_num,dfas_pseudo_ssn,line_type,fir_name_1,surname_3,soc_sec_no,pyf_pay_det_cd,occup_cde,job_loc_cde,org_cde,ehrp_emp_id,pay_basis
+2024,7,P000000005,D,Casey,Brown,222334444,BASIC,0601,GA01,ORG3001,E1005,PA
+2024,7,P000000006,D,Riley,Wilson,555667777,PREM,0401,GA02,ORG3002,E1006,PB

@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: mart_pay_calendar__current_period
+    description: Current pay period reference row.
+    columns:
+      - name: pay_period_key
+        data_tests:
+          - not_null
+          - unique
+
+  - name: mart_pseudossn__employee_directory
+    description: Employee directory for downstream marts.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_id
+        data_tests:
+          - not_null
+
+  - name: mart_comptime__employee_balances
+    description: Analyst-facing Comp Time balances by employee.
+    columns:
+      - name: comp_time_daily_key
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_pseudossn
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('mart_pseudossn__employee_directory')
+                field: employee_pseudossn
+
+  - name: mart_les__employee_leave_balances
+    description: Analyst-facing LES leave balances by employee and leave type.
+    columns:
+      - name: leave_balance_key
+        data_tests:
+          - not_null
+          - unique
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('mart_pay_calendar__current_period')
+                field: pay_period_key
+                
+  - name: mart_fda_leave__employee_activity
+    description: Analyst-facing FDA leave activity.
+    columns:
+      - name: fda_leave_activity_key
+        data_tests:
+          - not_null
+          - unique
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: mart_cpm__payroll_snapshot
+    description: Combined payroll snapshot across CPM subject areas.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: mart_ehrp2biis_update__job_actions
+    description: Analyst-facing EHRP job action mart.
+    columns:
+      - name: job_action_key
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_id
+        data_tests:
+          - not_null

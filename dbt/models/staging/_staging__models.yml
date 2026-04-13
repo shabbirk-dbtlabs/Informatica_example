@@ -1,0 +1,150 @@
+version: 2
+
+models:
+  - name: stg_comptime__daily_balances
+    description: Staged Comp Time balances by employee and earned date.
+    columns:
+      - name: employee_ssn
+        data_tests:
+          - not_null
+      - name: earned_date
+        data_tests:
+          - not_null
+      - name: flsa_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['N', 'E']
+
+  - name: stg_pay_calendar__pay_period
+    description: Staged pay period reference data.
+    columns:
+      - name: pay_period_key
+        data_tests:
+          - not_null
+          - unique
+      - name: pay_period_number
+        data_tests:
+          - not_null
+      - name: pay_period_end_year
+        data_tests:
+          - not_null
+      - name: is_current_pay_period_flag
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Y', 'N']
+
+  - name: stg_pseudossn__employees
+    description: Staged employee pseudonym crosswalk and core attributes.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_ssn
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_id
+        data_tests:
+          - not_null
+
+  - name: stg_les__leave_detail
+    description: Staged LES leave detail records.
+    columns:
+      - name: pay_period_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_pay_calendar__pay_period')
+                field: pay_period_key
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_pseudossn__employees')
+                field: employee_pseudossn
+      - name: leave_id
+        data_tests:
+          - not_null
+
+  - name: stg_fda_leave__transactions
+    description: Staged FDA leave transactions.
+    columns:
+      - name: fda_batch_id
+        data_tests:
+          - not_null
+      - name: pay_period_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_pay_calendar__pay_period')
+                field: pay_period_key
+      - name: employee_id
+        data_tests:
+          - not_null
+      - name: record_type
+        data_tests:
+          - not_null
+
+  - name: stg_cpm__newpay
+    description: Staged CPM payroll records.
+    columns:
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['cpm']
+
+  - name: stg_cpm_afps__newpay
+    description: Staged CPM AFPS payroll records.
+    columns:
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['cpm_afps']
+
+  - name: stg_cpm_cdc__newpay
+    description: Staged CPM CDC payroll records.
+    columns:
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['cpm_cdc']
+
+  - name: stg_cpm_nih__newpay
+    description: Staged CPM NIH payroll records.
+    columns:
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['cpm_nih']
+
+  - name: stg_cpm_oig__newpay
+    description: Staged CPM OIG payroll records.
+    columns:
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['cpm_oig']
+
+  - name: stg_ehrp2biis_update__job_actions
+    description: Staged EHRP job action records.
+    columns:
+      - name: employee_id
+        data_tests:
+          - not_null
+      - name: effective_date
+        data_tests:
+          - not_null
+      - name: action_code
+        data_tests:
+          - not_null

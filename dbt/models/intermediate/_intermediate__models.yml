@@ -1,0 +1,145 @@
+version: 2
+
+models:
+  - name: int_comptime__employee_daily_balances
+    description: Business-conformed Comp Time balances at employee and earned date grain.
+    columns:
+      - name: comp_time_daily_key
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_ssn
+        data_tests:
+          - not_null
+
+  - name: int_pay_calendar__periods
+    description: Reusable pay calendar dimension.
+    columns:
+      - name: pay_period_key
+        data_tests:
+          - not_null
+          - unique
+      - name: is_current_pay_period
+        data_tests:
+          - not_null
+
+  - name: int_pseudossn__employee_directory
+    description: Reusable employee directory built from pseudonymized crosswalk data.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_id
+        data_tests:
+          - not_null
+
+  - name: int_les__employee_leave_balances
+    description: Leave balance facts enriched with employee directory attributes.
+    columns:
+      - name: leave_balance_key
+        data_tests:
+          - not_null
+          - unique
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+      - name: employee_pseudossn
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pseudossn__employee_directory')
+                field: employee_pseudossn
+
+  - name: int_fda_leave__employee_activity
+    description: FDA leave activity enriched with pay period context.
+    columns:
+      - name: fda_leave_activity_key
+        data_tests:
+          - not_null
+          - unique
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: int_cpm__payroll_snapshot
+    description: Standardized CPM payroll snapshot.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: int_cpm_afps__payroll_snapshot
+    description: Standardized CPM AFPS payroll snapshot.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: int_cpm_cdc__payroll_snapshot
+    description: Standardized CPM CDC payroll snapshot.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: int_cpm_nih__payroll_snapshot
+    description: Standardized CPM NIH payroll snapshot.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: int_cpm_oig__payroll_snapshot
+    description: Standardized CPM OIG payroll snapshot.
+    columns:
+      - name: employee_pseudossn
+        data_tests:
+          - not_null
+      - name: pay_period_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_pay_calendar__periods')
+                field: pay_period_key
+
+  - name: int_ehrp2biis_update__job_actions
+    description: EHRP job actions enriched with stable business keys.
+    columns:
+      - name: job_action_key
+        data_tests:
+          - not_null
+          - unique
+      - name: employee_id
+        data_tests:
+          - not_null

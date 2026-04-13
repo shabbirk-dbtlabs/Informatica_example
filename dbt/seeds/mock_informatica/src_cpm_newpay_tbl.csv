@@ -1,0 +1,3 @@
+pp_end_year,pp_num,dfas_pseudo_ssn,line_type,fir_name_1,surname_3,soc_sec_no,pyf_pay_det_cd,occup_cde,job_loc_cde,org_cde,ehrp_emp_id,pay_basis
+2024,7,P000000001,D,Alex,Rivera,123456789,BASIC,1102,DC01,ORG1001,E1001,PA
+2024,7,P000000002,D,Jordan,Lee,987654321,OT,0343,MD01,ORG1002,E1002,PB

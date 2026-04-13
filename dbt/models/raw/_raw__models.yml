@@ -1,0 +1,54 @@
+version: 2
+
+sources:
+  - name: mock_informatica
+    description: Mocked Informatica source extracts seeded into Snowflake until real landed raw tables exist.
+    schema: informatica_migration_informatica_migration
+
+    tables:
+      - name: src_comptime_daily_tbl
+        description: Mock Comp Time daily extract.
+      - name: src_pay_period
+        description: Mock pay period reference table.
+      - name: src_pseudossn_from_sda_tbl
+        description: Mock pseudonymized employee crosswalk.
+      - name: src_les_emp_detail_leave_tbl
+        description: Mock LES leave detail extract.
+      - name: src_fda_tatran_tbl
+        description: Mock FDA leave transaction extract.
+      - name: src_cpm_newpay_tbl
+        description: Mock CPM payroll extract.
+      - name: src_cpm_afps_tbl
+        description: Mock CPM AFPS payroll extract.
+      - name: src_cpm_cdc_tbl
+        description: Mock CPM CDC payroll extract.
+      - name: src_cpm_nih_tbl
+        description: Mock CPM NIH payroll extract.
+      - name: src_cpm_oig_tbl
+        description: Mock CPM OIG payroll extract.
+      - name: src_ehrp_job_actions_tbl
+        description: Mock EHRP job action extract.
+
+models:
+  - name: raw_comptime__daily_tbl
+    description: Thin passthrough model for the Comp Time source extract.
+  - name: raw_pay_calendar__pay_period
+    description: Thin passthrough model for pay calendar reference data.
+  - name: raw_pseudossn__crosswalk
+    description: Thin passthrough model for employee pseudonym crosswalk data.
+  - name: raw_les__leave_detail
+    description: Thin passthrough model for LES leave detail records.
+  - name: raw_fda_leave__transactions
+    description: Thin passthrough model for FDA leave transactions.
+  - name: raw_cpm__newpay
+    description: Thin passthrough model for CPM payroll records.
+  - name: raw_cpm_afps__newpay
+    description: Thin passthrough model for CPM AFPS payroll records.
+  - name: raw_cpm_cdc__newpay
+    description: Thin passthrough model for CPM CDC payroll records.
+  - name: raw_cpm_nih__newpay
+    description: Thin passthrough model for CPM NIH payroll records.
+  - name: raw_cpm_oig__newpay
+    description: Thin passthrough model for CPM OIG payroll records.
+  - name: raw_ehrp2biis_update__job_actions
+    description: Thin passthrough model for EHRP job action records.

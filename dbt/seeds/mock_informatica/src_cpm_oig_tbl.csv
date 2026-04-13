@@ -1,0 +1,3 @@
+pp_end_year,pp_num,dfas_pseudo_ssn,line_type,fir_name_1,surname_3,soc_sec_no,pyf_pay_det_cd,occup_cde,job_loc_cde,org_cde,ehrp_emp_id,pay_basis
+2024,7,P000000009,D,Sam,Green,777889999,BASIC,1801,DC20,ORG5001,E1009,PA
+2024,7,P000000010,D,Robin,Hall,888990000,AWD,1811,DC21,ORG5002,E1010,PB
