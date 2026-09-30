@@ -1,0 +1,44 @@
+name: dbt_migration
+
+profile: snowflake_demo
+
+seed-paths: ["seeds"]
+model-paths: ["models"]
+macro-paths: ["macros"]
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  dbt_migration:
+    +schema: informatica_source
+    u0287d01:
+      +column_types:
+        SSN: varchar(9)
+        NAME: varchar(30)
+        CURRENT_ACCT: varchar(6)
+        CURRENT_ORG: varchar(7)
+        FLSA_STATUS: varchar(1)
+        COMP_TIME_CUR_BAL: number(8,2)
+        COMP_TIME_YEAR_EARNED: number(4,0)
+        PP_END_DATE: varchar(8)
+        DAILY_DATE_EARNED: varchar(8)
+        COMP_TIME_RATE: number(6,2)
+        COMP_TIME_HOURS: number(8,2)
+        COMP_TIME_UNDEF: number(6,0)
+    pay_period:
+      +column_types:
+        pp_num: number(2,0)
+        pp_end_year: number(4,0)
+        pp_start_dte: date
+        pp_end_dte: date
+        lv_num: number(2,0)
+        lv_year: number(4,0)
+        pay_dte: date
+        curr_pp_flag: varchar(1)
+        holiday_1: date
+        holiday_2: date
+
+models:
+  dbt_migration:
+    +static_analysis: strict

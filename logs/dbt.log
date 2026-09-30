@@ -1,0 +1,47 @@
+==================== 2026-09-29T23:45:58.378404Z | 01a0ef8f-9069-7603-8273-4fbf826bf524 ====================
+23:45:58.378505 [info ]: Installing dbt project and profile setup
+23:45:58.386709 [info ]: Info Created .vscode/extensions.json with dbt extension recommendation
+23:45:58.386777 [info ]: Success Project created successfully!
+23:45:58.386796 [info ]: Info Project name: jaffle_shop
+23:45:58.386808 [info ]: Info Project directory: jaffle_shop
+23:46:11.703842 [info ]: Info Using existing profile 'snowflake_demo'
+23:46:11.704424 [info ]: Success Set profile 'snowflake_demo' in dbt_project.yml
+23:46:11.704499 [info ]: Validating profile inputs, adapters, and connection
+
+23:46:11.704582 [info ]: dbt 2.0.6
+23:46:11.704873 [info ]: Started loading project
+23:46:11.706590 [info ]: Loading ~/.dbt/profiles.yml
+23:46:11.710376 [info ]: Finished loading project [  0.01s]
+23:46:11.710573 [info ]: Started debugging
+23:46:11.710681 [info ]: Debugging profile: workshop
+23:46:11.710723 [info ]: Debugging dbt version: 2.0.6
+23:46:11.710766 [info ]: Debugging platform: macos aarch64 (unix)
+23:46:11.710825 [info ]: Debugging adapter type: snowflake (remote)
+23:46:11.734257 [info ]: Debugging dependencies:
+  git: OK
+23:46:11.734469 [info ]: Debugging connection:
+  "client_session_keep_alive": false,
+  "account": "zna84829",
+  "user": "ANZ_WORKSHOP_DEV_ACCOUNT",
+  "database": "ANZ_WORKSHOP",
+  "warehouse": "ANZ_WORKSHOP",
+  "schema": "dev_skhanbhai",
+  "role": "TRANSFORMER"
+23:46:11.735062 [debug]: Snowflake driver resolved: snowflake 0.21.0.dev+dbt0.21.18
+23:46:12.748859 [debug]: borrow_tlocal_connection() took 1.0140425s
+23:46:12.751210 [debug]: create_debug_span(...).entered() took 170.042µs
+23:46:12.988273 [debug]: stmt.execute() (submit+wait_for_completion, returns reader) took 236.922166ms
+23:46:12.988293 [debug]: reader.schema() took 42ns
+23:46:12.989430 [debug]: do_execute(conn) (closure: stmt.execute + schema + batch loop) took 238.198083ms
+23:46:12.989609 [debug]: concat_batches + normalize_result_column_names took 169.209µs
+23:46:12.989675 [debug]: record_current_span_status_from_attrs took 61.125µs
+23:46:12.989706 [debug]: Query executed on node unknown:
+select 1 as id
+23:46:12.989732 [debug]: drop(query_span_guard) (span exit/export) took 52.417µs
+23:46:12.990018 [debug]: adapter.execute() (full call, incl. adbc_execute_with_options) took 241.076875ms
+23:46:12.990068 [info ]: Debugging connection test: OK (1.3s)
+23:46:12.990274 [info ]: Debugged All checks passed!
+23:46:12.990315 [info ]: Finished debugging [  1.28s]
+23:46:13.006858 [info ]: 
+==================== Execution Summary =====================
+Finished 'init' successfully for target 'workshop' [14.6s]
